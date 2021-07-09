@@ -1,0 +1,24 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  broker:
+    image: "eclipse-mosquitto"
+    ports:
+      - 1883:1883
+      - 9001:9001
+    volumes:
+      - ./broker/mosquitto.conf:/mosquitto/config/mosquitto.conf
+  sensor:
+    build: ./sensors
+    command: ['python', 'main.py', 'broker', '1883', 'iot/temperature']
+    environment:
+      - PYTHONUNBUFFERED=1
+  cat:
+    build: ./monitor
+    command: ['python', 'main.py']
+    environment:
+      - PYTHONUNBUFFERED=1
+  alarm:
+    build: ./alarm
+    command: ['python', 'main.py', 'broker', '1883', 'iot/alarm']
+    environment:
+      - PYTHONUNBUFFERED=1
