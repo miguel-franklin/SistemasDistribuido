@@ -8,7 +8,7 @@ Temos uma stack rodando via docker-compose com:
 Essa solucao contem 4 servicos:
 
 - broker
-- alarm (detecta e dispara alarms para o monitor)
+- alarm (detecta alarms do monitor)
 - cat (calcula a media temeperatura dos sensores a cada 60 seg)
 - sensor (coleta a temperatura dos senores)
 
